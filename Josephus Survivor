@@ -1,0 +1,15 @@
+Problem
+In this kata, you have to correctly return who is the "survivor", ie: the last element of a Josephus permutation.
+Basically, you have to assume that n people are put into a circle and that they are eliminated in steps of k elements.
+
+Python Code
+def josephus_survivor(n,k):
+    survivors = [i+1 for i in range(n)]
+    remaining_survivors = survivors[:]
+    number_of_survivors = len(remaining_survivors)
+    jump = (k - 1) % number_of_survivors
+    while number_of_survivors > 1:
+      remaining_survivors.pop(jump)
+      number_of_survivors -= 1
+      jump = (jump + k - 1) % number_of_survivors
+    return remaining_survivors[0]
