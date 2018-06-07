@@ -1,0 +1,23 @@
+Problem
+Create a function taking a positive integer as its parameter and returning a string containing
+the Roman Numeral representation of that integer. Modern Roman numerals are written by expressing
+each digit separately, starting with the left most digit and skipping any digit with a value of zero. 
+In Roman numerals, 1990 is rendered: 1000=M, 900=CM, 90=XC; resulting in MCMXC. 
+2008 is written as 2000=MM, 8=VIII; or MMVIII. 1666 uses each Roman symbol in descending order: MDCLXVI.
+
+Python Code
+def solution(n):
+    symbols = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M']
+    numbers = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]
+    roman_dict = dict(zip(numbers, symbols))
+    roman_numbers = []
+    roman_symbols = []
+    number = n
+    while True:
+        new_number = max(i for i in numbers if i <= number)
+        roman_numbers.append(new_number)
+        number = number - new_number
+        if number == 0:
+           break
+    roman_symbols = [roman_dict[j] for j in roman_numbers]
+    return ''.join(roman_symbols)
